@@ -1,0 +1,67 @@
+﻿@model DoctorsWebApplication.Models.Qualification
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Qualification</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Doctor Name
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Doctor.Person.CombinedName)
+        </dd>
+        <dt class = "col-sm-2">
+            Qualification
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Qualification1)
+        </dd>
+        <dt class = "col-sm-2">
+            Specialisation
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Specialisation)
+        </dd>
+        <dt class = "col-sm-2">
+            Institution
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Institution)
+        </dd>
+        <dt class = "col-sm-2">
+            Modified Date
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+        <dt class = "col-sm-2">
+            Modified By
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+        <dt class = "col-sm-2">
+            Created Date
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+        <dt class = "col-sm-2">
+            Created By
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.QualificationId">Edit</a> |
+    <a asp-action="Index" asp-route-id="@ViewBag.PersonId">Back to List</a>
+</div>

@@ -1,0 +1,85 @@
+﻿@model IPageMetaDataModel<X.PagedList.IPagedList<DoctorsWebApplication.Models.Supplier>, IPageSearchData>
+@using DoctorsWebApplication.Search;
+@using X.PagedList.Mvc.Core;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>List of Suppliers</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@using (Html.BeginForm("Index", "Suppliers", FormMethod.Get))
+{
+    <p>
+        @Html.TextBox("SearchString", Model.PageSearchData.SearchString)
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.ActionLink("Supplier Name", "Index", new {  SortOrder = "SupplierName", SearchString = Model.PageSearchData.SearchString })
+            </th>
+            <th>
+                Modified Date
+            </th>
+            <th>
+                Modified By
+            </th>
+            <th>
+                Created Date
+            </th>
+            <th>
+                Created By
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.PagedList) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SupplierId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SupplierId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SupplierId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@Html.PagedListPager(Model.PagedList, page => Url.Action("Index", new
+    {
+    page,
+    sortOrder = Model.PageSearchData.SortOrder,
+    currentFilter = Model.PageSearchData.CurrentFilter,
+    checkCurrent = Model.PageSearchData.CheckCurrent,
+    searchString = Model.PageSearchData.SearchString
+    }), X.PagedList.Mvc.Core.PagedListRenderOptions.TwitterBootstrapPager)
+
+    Page @(Model.PagedList.PageCount < Model.PagedList.PageNumber ? 0 : Model.PagedList.PageNumber) of @Model.PagedList.PageCount
+<br />
+    Total Records @Model.PagedList.TotalItemCount
+

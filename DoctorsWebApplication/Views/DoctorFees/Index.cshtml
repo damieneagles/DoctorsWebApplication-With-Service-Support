@@ -1,0 +1,77 @@
+﻿@model IEnumerable<DoctorsWebApplication.Models.DoctorFee>
+@using DoctorsWebApplication.Search;
+@using X.PagedList.Mvc.Core;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>List of Doctor Fees</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Doctor Name
+            </th>
+            <th>
+                Fee
+            </th>
+            <th>
+                Bulk Billed
+            </th>
+            <th>
+                Modified Date
+            </th>
+            <th>
+                Modified By
+            </th>
+            <th>
+                Created Date
+            </th>
+            <th>
+                Created By
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Doctor.Person.CombinedName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fee.DoctorFee)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fee.BulkBilled)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedBy)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.DoctorFeeId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.DoctorFeeId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.DoctorFeeId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

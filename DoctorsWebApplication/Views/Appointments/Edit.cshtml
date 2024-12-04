@@ -1,0 +1,81 @@
+﻿@model DoctorsWebApplication.Models.Appointment
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Appointment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="AppointmentId" />
+            <div class="form-group">
+                <label asp-for="DoctorId" class="control-label">Doctor Name</label>
+                <select asp-for="DoctorId" class="form-control" asp-items="ViewBag.DoctorList"></select>
+                <span asp-validation-for="DoctorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PatientId" class="control-label">Patient Name</label>
+                <select asp-for="PatientId" class="form-control" asp-items="ViewBag.PatientList"></select>
+                <span asp-validation-for="PatientId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartAppointment" class="control-label">Start Appointment</label>
+                <input asp-for="StartAppointment" class="form-control" />
+                <span asp-validation-for="StartAppointment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndAppointment" class="control-label">End Appointment</label>
+                <input asp-for="EndAppointment" class="form-control" />
+                <span asp-validation-for="EndAppointment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Room" class="control-label">Room Number</label>
+                <input asp-for="Room" class="form-control" />
+                <span asp-validation-for="Room" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Floor" class="control-label">Floor Number</label>
+                <input asp-for="Floor" class="form-control" />
+                <span asp-validation-for="Floor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModifiedDate" class="control-label">Modified Date</label>
+                <input asp-for="ModifiedDate" class="form-control" disabled="true" />
+                <span asp-validation-for="ModifiedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModifiedBy" class="control-label">Modified By</label>
+                <input asp-for="ModifiedBy" class="form-control" disabled="true" />
+                <span asp-validation-for="ModifiedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedDate" class="control-label">Created Date</label>
+                <input asp-for="CreatedDate" class="form-control" disabled="true" />
+                <span asp-validation-for="CreatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedBy" class="control-label">Created By</label>
+                <input asp-for="CreatedBy" class="form-control" disabled="true" />
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

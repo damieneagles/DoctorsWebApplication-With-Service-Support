@@ -1,0 +1,107 @@
+﻿@model IPageMetaDataModel<X.PagedList.IPagedList<DoctorsWebApplication.Models.GPSurgery>, IPageSearchData>
+@using DoctorsWebApplication.Search;
+@using X.PagedList.Mvc.Core;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>List of GP Surgeries</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@using (Html.BeginForm("Index", "GPSurgeries", FormMethod.Get))
+{
+    <p>
+        @Html.TextBox("SearchString", Model.PageSearchData.SearchString)
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </p>
+
+    <p>
+        Current surgeries only : @Html.CheckBox("CheckCurrent", Model.PageSearchData.CheckCurrent)
+        <input type="submit" value="Find" class="btn btn-primary" />
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.ActionLink("Surgery Name", "Index", new {  SortOrder = "SurgeryName", SearchString = Model.PageSearchData.SearchString })
+            </th>
+            <th>
+                Start Consult Date
+            </th>
+            <th>
+                End Consult Date
+            </th>
+            <th>
+                Current Flag
+            </th>
+            <th>
+                Modified Date
+            </th>
+            <th>
+                Modified By
+            </th>
+            <th>
+                Created Date
+            </th>
+            <th>
+                Created By
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.PagedList) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SurgeryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartConsultDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndConsultDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentFlag)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.GPSurgeryId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.GPSurgeryId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.GPSurgeryId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@Html.PagedListPager(Model.PagedList, page => Url.Action("Index", new
+    {
+    page,
+    sortOrder = Model.PageSearchData.SortOrder,
+    currentFilter = Model.PageSearchData.CurrentFilter,
+    checkCurrent = Model.PageSearchData.CheckCurrent,
+    searchString = Model.PageSearchData.SearchString
+    }), X.PagedList.Mvc.Core.PagedListRenderOptions.TwitterBootstrapPager)
+
+    Page @(Model.PagedList.PageCount < Model.PagedList.PageNumber ? 0 : Model.PagedList.PageNumber) of @Model.PagedList.PageCount
+<br />
+    Total Records @Model.PagedList.TotalItemCount
+
