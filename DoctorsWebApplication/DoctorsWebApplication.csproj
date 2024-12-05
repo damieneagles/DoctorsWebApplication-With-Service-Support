@@ -160,8 +160,4 @@
 
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="IF NOT EXIST $(SolutionDir)DoctorsWebApplication\bin\$(Configuration)\net9.0 ( mkdir $(SolutionDir)DoctorsWebApplication\bin\$(Configuration)\net9.0 )&#xD;&#xA;IF NOT EXIST $(SolutionDir)DoctorsWebApplication\bin\$(Configuration)\net9.0\publish ( mkdir $(SolutionDir)DoctorsWebApplication\bin\$(Configuration)\net9.0\publish )&#xD;&#xA;copy /y $(SolutionDir)DoctorsDatabase\bin\$(Configuration)\doctorsdatabase.dacpac $(SolutionDir)DoctorsWebApplication\bin\$(Configuration)\net9.0&#xD;&#xA;copy /y $(SolutionDir)DoctorsDatabase\bin\$(Configuration)\doctorsdatabase.dacpac $(SolutionDir)DoctorsWebApplication\bin\$(Configuration)\net9.0\publish" />
-  </Target>
-
 </Project>
