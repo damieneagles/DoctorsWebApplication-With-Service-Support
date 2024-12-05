@@ -194,8 +194,8 @@ namespace DoctorsWebApplication
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////
             //Monitor the Queue Service...
-            MonitorLoop monitorLoop = App.Services.GetRequiredService<MonitorLoop>()!;
-            monitorLoop.StartMonitorLoop();
+            //MonitorLoop monitorLoop = App.Services.GetRequiredService<MonitorLoop>()!;
+            //monitorLoop.StartMonitorLoop();
             ////////////////////////////////////////////////////////////////////////////////////////////////////////
             ///
             if (App.Environment.IsDevelopment())
